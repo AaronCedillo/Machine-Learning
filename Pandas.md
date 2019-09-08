@@ -619,7 +619,6 @@ new_Frame
 
 ```python
 # aislar solo a una columna del dataFrame
-
 pop = new_Frame.pop('bool')
 pop
 ```
@@ -695,7 +694,6 @@ new_Frame.drop(columns='test')
 
 ```python
 # Leeremos un archivo CSV (comma-separated values)
-
 file = pd.read_csv("SMSSpamCollection.csv", sep=',')
 file.head(15)
 ```
@@ -1202,7 +1200,945 @@ print("Comprobamos: ", new_file.shape[0])
     Comprobamos:  20433
 
 
+#### Graficar con Pandas
+
 
 ```python
+import pandas as pd
+import matplotlib.pyplot as plt
 
+plt.style.use("seaborn-dark")
+```
+
+
+```python
+new_file = pd.read_csv("housing.csv", sep=',')
+new_file.head(15)
+```
+
+
+
+
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>longitude</th>
+      <th>latitude</th>
+      <th>housing_median_age</th>
+      <th>total_rooms</th>
+      <th>total_bedrooms</th>
+      <th>population</th>
+      <th>households</th>
+      <th>median_income</th>
+      <th>median_house_value</th>
+      <th>ocean_proximity</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>-122.23</td>
+      <td>37.88</td>
+      <td>41.0</td>
+      <td>880.0</td>
+      <td>129.0</td>
+      <td>322.0</td>
+      <td>126.0</td>
+      <td>8.3252</td>
+      <td>452600.0</td>
+      <td>NEAR BAY</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>-122.22</td>
+      <td>37.86</td>
+      <td>21.0</td>
+      <td>7099.0</td>
+      <td>1106.0</td>
+      <td>2401.0</td>
+      <td>1138.0</td>
+      <td>8.3014</td>
+      <td>358500.0</td>
+      <td>NEAR BAY</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>-122.24</td>
+      <td>37.85</td>
+      <td>52.0</td>
+      <td>1467.0</td>
+      <td>190.0</td>
+      <td>496.0</td>
+      <td>177.0</td>
+      <td>7.2574</td>
+      <td>352100.0</td>
+      <td>NEAR BAY</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>-122.25</td>
+      <td>37.85</td>
+      <td>52.0</td>
+      <td>1274.0</td>
+      <td>235.0</td>
+      <td>558.0</td>
+      <td>219.0</td>
+      <td>5.6431</td>
+      <td>341300.0</td>
+      <td>NEAR BAY</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>-122.25</td>
+      <td>37.85</td>
+      <td>52.0</td>
+      <td>1627.0</td>
+      <td>280.0</td>
+      <td>565.0</td>
+      <td>259.0</td>
+      <td>3.8462</td>
+      <td>342200.0</td>
+      <td>NEAR BAY</td>
+    </tr>
+    <tr>
+      <th>5</th>
+      <td>-122.25</td>
+      <td>37.85</td>
+      <td>52.0</td>
+      <td>919.0</td>
+      <td>213.0</td>
+      <td>413.0</td>
+      <td>193.0</td>
+      <td>4.0368</td>
+      <td>269700.0</td>
+      <td>NEAR BAY</td>
+    </tr>
+    <tr>
+      <th>6</th>
+      <td>-122.25</td>
+      <td>37.84</td>
+      <td>52.0</td>
+      <td>2535.0</td>
+      <td>489.0</td>
+      <td>1094.0</td>
+      <td>514.0</td>
+      <td>3.6591</td>
+      <td>299200.0</td>
+      <td>NEAR BAY</td>
+    </tr>
+    <tr>
+      <th>7</th>
+      <td>-122.25</td>
+      <td>37.84</td>
+      <td>52.0</td>
+      <td>3104.0</td>
+      <td>687.0</td>
+      <td>1157.0</td>
+      <td>647.0</td>
+      <td>3.1200</td>
+      <td>241400.0</td>
+      <td>NEAR BAY</td>
+    </tr>
+    <tr>
+      <th>8</th>
+      <td>-122.26</td>
+      <td>37.84</td>
+      <td>42.0</td>
+      <td>2555.0</td>
+      <td>665.0</td>
+      <td>1206.0</td>
+      <td>595.0</td>
+      <td>2.0804</td>
+      <td>226700.0</td>
+      <td>NEAR BAY</td>
+    </tr>
+    <tr>
+      <th>9</th>
+      <td>-122.25</td>
+      <td>37.84</td>
+      <td>52.0</td>
+      <td>3549.0</td>
+      <td>707.0</td>
+      <td>1551.0</td>
+      <td>714.0</td>
+      <td>3.6912</td>
+      <td>261100.0</td>
+      <td>NEAR BAY</td>
+    </tr>
+    <tr>
+      <th>10</th>
+      <td>-122.26</td>
+      <td>37.85</td>
+      <td>52.0</td>
+      <td>2202.0</td>
+      <td>434.0</td>
+      <td>910.0</td>
+      <td>402.0</td>
+      <td>3.2031</td>
+      <td>281500.0</td>
+      <td>NEAR BAY</td>
+    </tr>
+    <tr>
+      <th>11</th>
+      <td>-122.26</td>
+      <td>37.85</td>
+      <td>52.0</td>
+      <td>3503.0</td>
+      <td>752.0</td>
+      <td>1504.0</td>
+      <td>734.0</td>
+      <td>3.2705</td>
+      <td>241800.0</td>
+      <td>NEAR BAY</td>
+    </tr>
+    <tr>
+      <th>12</th>
+      <td>-122.26</td>
+      <td>37.85</td>
+      <td>52.0</td>
+      <td>2491.0</td>
+      <td>474.0</td>
+      <td>1098.0</td>
+      <td>468.0</td>
+      <td>3.0750</td>
+      <td>213500.0</td>
+      <td>NEAR BAY</td>
+    </tr>
+    <tr>
+      <th>13</th>
+      <td>-122.26</td>
+      <td>37.84</td>
+      <td>52.0</td>
+      <td>696.0</td>
+      <td>191.0</td>
+      <td>345.0</td>
+      <td>174.0</td>
+      <td>2.6736</td>
+      <td>191300.0</td>
+      <td>NEAR BAY</td>
+    </tr>
+    <tr>
+      <th>14</th>
+      <td>-122.26</td>
+      <td>37.85</td>
+      <td>52.0</td>
+      <td>2643.0</td>
+      <td>626.0</td>
+      <td>1212.0</td>
+      <td>620.0</td>
+      <td>1.9167</td>
+      <td>159200.0</td>
+      <td>NEAR BAY</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+
+
+
+
+```python
+new_file.hist(bins = 10, column='housing_median_age', width=4, figsize=(6, 6))
+```
+
+
+
+
+    array([[<matplotlib.axes._subplots.AxesSubplot object at 0x7f16a8016d30>]],
+          dtype=object)
+
+
+
+
+![png](output_44_1.png)
+
+
+
+```python
+new_file.boxplot(column='housing_median_age', figsize=(6, 6))
+```
+
+
+
+
+    <matplotlib.axes._subplots.AxesSubplot at 0x7f16ad535470>
+
+
+
+
+![png](output_45_1.png)
+
+
+<img src="https://pro.arcgis.com/en/pro-app/help/analysis/geoprocessing/charts/GUID-0E2C3730-C535-40CD-8152-80D794A996A7-web.png">
+
+
+```python
+# Seleccionando columnas en especifico
+new_file[['latitude', 'total_rooms']].head()
+```
+
+
+
+
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>latitude</th>
+      <th>total_rooms</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>37.88</td>
+      <td>880.0</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>37.86</td>
+      <td>7099.0</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>37.85</td>
+      <td>1467.0</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>37.85</td>
+      <td>1274.0</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>37.85</td>
+      <td>1627.0</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+
+
+
+
+```python
+#ultimas 10 filas
+new_file.tail(10)
+```
+
+
+
+
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>longitude</th>
+      <th>latitude</th>
+      <th>housing_median_age</th>
+      <th>total_rooms</th>
+      <th>total_bedrooms</th>
+      <th>population</th>
+      <th>households</th>
+      <th>median_income</th>
+      <th>median_house_value</th>
+      <th>ocean_proximity</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>20630</th>
+      <td>-121.32</td>
+      <td>39.29</td>
+      <td>11.0</td>
+      <td>2640.0</td>
+      <td>505.0</td>
+      <td>1257.0</td>
+      <td>445.0</td>
+      <td>3.5673</td>
+      <td>112000.0</td>
+      <td>INLAND</td>
+    </tr>
+    <tr>
+      <th>20631</th>
+      <td>-121.40</td>
+      <td>39.33</td>
+      <td>15.0</td>
+      <td>2655.0</td>
+      <td>493.0</td>
+      <td>1200.0</td>
+      <td>432.0</td>
+      <td>3.5179</td>
+      <td>107200.0</td>
+      <td>INLAND</td>
+    </tr>
+    <tr>
+      <th>20632</th>
+      <td>-121.45</td>
+      <td>39.26</td>
+      <td>15.0</td>
+      <td>2319.0</td>
+      <td>416.0</td>
+      <td>1047.0</td>
+      <td>385.0</td>
+      <td>3.1250</td>
+      <td>115600.0</td>
+      <td>INLAND</td>
+    </tr>
+    <tr>
+      <th>20633</th>
+      <td>-121.53</td>
+      <td>39.19</td>
+      <td>27.0</td>
+      <td>2080.0</td>
+      <td>412.0</td>
+      <td>1082.0</td>
+      <td>382.0</td>
+      <td>2.5495</td>
+      <td>98300.0</td>
+      <td>INLAND</td>
+    </tr>
+    <tr>
+      <th>20634</th>
+      <td>-121.56</td>
+      <td>39.27</td>
+      <td>28.0</td>
+      <td>2332.0</td>
+      <td>395.0</td>
+      <td>1041.0</td>
+      <td>344.0</td>
+      <td>3.7125</td>
+      <td>116800.0</td>
+      <td>INLAND</td>
+    </tr>
+    <tr>
+      <th>20635</th>
+      <td>-121.09</td>
+      <td>39.48</td>
+      <td>25.0</td>
+      <td>1665.0</td>
+      <td>374.0</td>
+      <td>845.0</td>
+      <td>330.0</td>
+      <td>1.5603</td>
+      <td>78100.0</td>
+      <td>INLAND</td>
+    </tr>
+    <tr>
+      <th>20636</th>
+      <td>-121.21</td>
+      <td>39.49</td>
+      <td>18.0</td>
+      <td>697.0</td>
+      <td>150.0</td>
+      <td>356.0</td>
+      <td>114.0</td>
+      <td>2.5568</td>
+      <td>77100.0</td>
+      <td>INLAND</td>
+    </tr>
+    <tr>
+      <th>20637</th>
+      <td>-121.22</td>
+      <td>39.43</td>
+      <td>17.0</td>
+      <td>2254.0</td>
+      <td>485.0</td>
+      <td>1007.0</td>
+      <td>433.0</td>
+      <td>1.7000</td>
+      <td>92300.0</td>
+      <td>INLAND</td>
+    </tr>
+    <tr>
+      <th>20638</th>
+      <td>-121.32</td>
+      <td>39.43</td>
+      <td>18.0</td>
+      <td>1860.0</td>
+      <td>409.0</td>
+      <td>741.0</td>
+      <td>349.0</td>
+      <td>1.8672</td>
+      <td>84700.0</td>
+      <td>INLAND</td>
+    </tr>
+    <tr>
+      <th>20639</th>
+      <td>-121.24</td>
+      <td>39.37</td>
+      <td>16.0</td>
+      <td>2785.0</td>
+      <td>616.0</td>
+      <td>1387.0</td>
+      <td>530.0</td>
+      <td>2.3886</td>
+      <td>89400.0</td>
+      <td>INLAND</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+
+
+
+
+```python
+# Contar los valores del mismo valor en alguna columna
+new_file_counts = new_file['latitude'].value_counts()
+new_file_counts.head(10)
+```
+
+
+
+
+    34.06    244
+    34.05    236
+    34.08    234
+    34.07    231
+    34.04    221
+    34.09    212
+    34.02    208
+    34.10    203
+    34.03    193
+    33.93    181
+    Name: latitude, dtype: int64
+
+
+
+### Seleccionando / Filtrando Filas
+
+
+```python
+data_Filter = new_file['latitude'] >= 30.0
+new_file[data_Filter][30:50]
+```
+
+
+
+
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>longitude</th>
+      <th>latitude</th>
+      <th>housing_median_age</th>
+      <th>total_rooms</th>
+      <th>total_bedrooms</th>
+      <th>population</th>
+      <th>households</th>
+      <th>median_income</th>
+      <th>median_house_value</th>
+      <th>ocean_proximity</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>30</th>
+      <td>-122.28</td>
+      <td>37.84</td>
+      <td>49.0</td>
+      <td>1916.0</td>
+      <td>447.0</td>
+      <td>863.0</td>
+      <td>378.0</td>
+      <td>1.9274</td>
+      <td>122300.0</td>
+      <td>NEAR BAY</td>
+    </tr>
+    <tr>
+      <th>31</th>
+      <td>-122.28</td>
+      <td>37.84</td>
+      <td>52.0</td>
+      <td>2153.0</td>
+      <td>481.0</td>
+      <td>1168.0</td>
+      <td>441.0</td>
+      <td>1.9615</td>
+      <td>115200.0</td>
+      <td>NEAR BAY</td>
+    </tr>
+    <tr>
+      <th>32</th>
+      <td>-122.27</td>
+      <td>37.84</td>
+      <td>48.0</td>
+      <td>1922.0</td>
+      <td>409.0</td>
+      <td>1026.0</td>
+      <td>335.0</td>
+      <td>1.7969</td>
+      <td>110400.0</td>
+      <td>NEAR BAY</td>
+    </tr>
+    <tr>
+      <th>33</th>
+      <td>-122.27</td>
+      <td>37.83</td>
+      <td>49.0</td>
+      <td>1655.0</td>
+      <td>366.0</td>
+      <td>754.0</td>
+      <td>329.0</td>
+      <td>1.3750</td>
+      <td>104900.0</td>
+      <td>NEAR BAY</td>
+    </tr>
+    <tr>
+      <th>34</th>
+      <td>-122.27</td>
+      <td>37.83</td>
+      <td>51.0</td>
+      <td>2665.0</td>
+      <td>574.0</td>
+      <td>1258.0</td>
+      <td>536.0</td>
+      <td>2.7303</td>
+      <td>109700.0</td>
+      <td>NEAR BAY</td>
+    </tr>
+    <tr>
+      <th>35</th>
+      <td>-122.27</td>
+      <td>37.83</td>
+      <td>49.0</td>
+      <td>1215.0</td>
+      <td>282.0</td>
+      <td>570.0</td>
+      <td>264.0</td>
+      <td>1.4861</td>
+      <td>97200.0</td>
+      <td>NEAR BAY</td>
+    </tr>
+    <tr>
+      <th>36</th>
+      <td>-122.27</td>
+      <td>37.83</td>
+      <td>48.0</td>
+      <td>1798.0</td>
+      <td>432.0</td>
+      <td>987.0</td>
+      <td>374.0</td>
+      <td>1.0972</td>
+      <td>104500.0</td>
+      <td>NEAR BAY</td>
+    </tr>
+    <tr>
+      <th>37</th>
+      <td>-122.28</td>
+      <td>37.83</td>
+      <td>52.0</td>
+      <td>1511.0</td>
+      <td>390.0</td>
+      <td>901.0</td>
+      <td>403.0</td>
+      <td>1.4103</td>
+      <td>103900.0</td>
+      <td>NEAR BAY</td>
+    </tr>
+    <tr>
+      <th>38</th>
+      <td>-122.26</td>
+      <td>37.83</td>
+      <td>52.0</td>
+      <td>1470.0</td>
+      <td>330.0</td>
+      <td>689.0</td>
+      <td>309.0</td>
+      <td>3.4800</td>
+      <td>191400.0</td>
+      <td>NEAR BAY</td>
+    </tr>
+    <tr>
+      <th>39</th>
+      <td>-122.26</td>
+      <td>37.83</td>
+      <td>52.0</td>
+      <td>2432.0</td>
+      <td>715.0</td>
+      <td>1377.0</td>
+      <td>696.0</td>
+      <td>2.5898</td>
+      <td>176000.0</td>
+      <td>NEAR BAY</td>
+    </tr>
+    <tr>
+      <th>40</th>
+      <td>-122.26</td>
+      <td>37.83</td>
+      <td>52.0</td>
+      <td>1665.0</td>
+      <td>419.0</td>
+      <td>946.0</td>
+      <td>395.0</td>
+      <td>2.0978</td>
+      <td>155400.0</td>
+      <td>NEAR BAY</td>
+    </tr>
+    <tr>
+      <th>41</th>
+      <td>-122.26</td>
+      <td>37.83</td>
+      <td>51.0</td>
+      <td>936.0</td>
+      <td>311.0</td>
+      <td>517.0</td>
+      <td>249.0</td>
+      <td>1.2852</td>
+      <td>150000.0</td>
+      <td>NEAR BAY</td>
+    </tr>
+    <tr>
+      <th>42</th>
+      <td>-122.26</td>
+      <td>37.84</td>
+      <td>49.0</td>
+      <td>713.0</td>
+      <td>202.0</td>
+      <td>462.0</td>
+      <td>189.0</td>
+      <td>1.0250</td>
+      <td>118800.0</td>
+      <td>NEAR BAY</td>
+    </tr>
+    <tr>
+      <th>43</th>
+      <td>-122.26</td>
+      <td>37.84</td>
+      <td>52.0</td>
+      <td>950.0</td>
+      <td>202.0</td>
+      <td>467.0</td>
+      <td>198.0</td>
+      <td>3.9643</td>
+      <td>188800.0</td>
+      <td>NEAR BAY</td>
+    </tr>
+    <tr>
+      <th>44</th>
+      <td>-122.26</td>
+      <td>37.83</td>
+      <td>52.0</td>
+      <td>1443.0</td>
+      <td>311.0</td>
+      <td>660.0</td>
+      <td>292.0</td>
+      <td>3.0125</td>
+      <td>184400.0</td>
+      <td>NEAR BAY</td>
+    </tr>
+    <tr>
+      <th>45</th>
+      <td>-122.26</td>
+      <td>37.83</td>
+      <td>52.0</td>
+      <td>1656.0</td>
+      <td>420.0</td>
+      <td>718.0</td>
+      <td>382.0</td>
+      <td>2.6768</td>
+      <td>182300.0</td>
+      <td>NEAR BAY</td>
+    </tr>
+    <tr>
+      <th>46</th>
+      <td>-122.26</td>
+      <td>37.83</td>
+      <td>50.0</td>
+      <td>1125.0</td>
+      <td>322.0</td>
+      <td>616.0</td>
+      <td>304.0</td>
+      <td>2.0260</td>
+      <td>142500.0</td>
+      <td>NEAR BAY</td>
+    </tr>
+    <tr>
+      <th>47</th>
+      <td>-122.27</td>
+      <td>37.82</td>
+      <td>43.0</td>
+      <td>1007.0</td>
+      <td>312.0</td>
+      <td>558.0</td>
+      <td>253.0</td>
+      <td>1.7348</td>
+      <td>137500.0</td>
+      <td>NEAR BAY</td>
+    </tr>
+    <tr>
+      <th>48</th>
+      <td>-122.26</td>
+      <td>37.82</td>
+      <td>40.0</td>
+      <td>624.0</td>
+      <td>195.0</td>
+      <td>423.0</td>
+      <td>160.0</td>
+      <td>0.9506</td>
+      <td>187500.0</td>
+      <td>NEAR BAY</td>
+    </tr>
+    <tr>
+      <th>49</th>
+      <td>-122.27</td>
+      <td>37.82</td>
+      <td>40.0</td>
+      <td>946.0</td>
+      <td>375.0</td>
+      <td>700.0</td>
+      <td>352.0</td>
+      <td>1.7750</td>
+      <td>112500.0</td>
+      <td>NEAR BAY</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+
+
+
+
+```python
+data_count = new_file[['latitude', 'population']].groupby('latitude').count()
+data_count.head(10)
+```
+
+
+
+
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>population</th>
+    </tr>
+    <tr>
+      <th>latitude</th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>32.54</th>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>32.55</th>
+      <td>3</td>
+    </tr>
+    <tr>
+      <th>32.56</th>
+      <td>10</td>
+    </tr>
+    <tr>
+      <th>32.57</th>
+      <td>18</td>
+    </tr>
+    <tr>
+      <th>32.58</th>
+      <td>26</td>
+    </tr>
+    <tr>
+      <th>32.59</th>
+      <td>11</td>
+    </tr>
+    <tr>
+      <th>32.60</th>
+      <td>9</td>
+    </tr>
+    <tr>
+      <th>32.61</th>
+      <td>14</td>
+    </tr>
+    <tr>
+      <th>32.62</th>
+      <td>13</td>
+    </tr>
+    <tr>
+      <th>32.63</th>
+      <td>18</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+
+
+
+
+```python
+ 
 ```
