@@ -8,4 +8,4 @@ https://www.kaggle.com/datasets
 https://www.kaggle.com/hugomathien/soccer
 
 # Aqui encontraremos el DataSet referente al cambio climatico, este se utilizo en DesisionTrees
-https://www.kaggle.com/zaraavagyan/weathercsv
+https://www.kaggle.com/ashukr/weatherdata/downloads/daily_weather.csv/1
